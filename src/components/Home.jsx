@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import SuperheroesCard from "./SuperheroesCard";
 import axios from "axios";
 import { Form } from "react-bootstrap";
+import SearchHero from "./SearchHero";
 
 export default function Home() {
   const [heroes, setHeroes] = useState({});
@@ -9,7 +10,7 @@ export default function Home() {
 
   useEffect(() => {
     getHero();
-  });
+  }, []);
 
   const getHero = async () => {
     const response = await axios.get(
@@ -20,6 +21,7 @@ export default function Home() {
 
   return (
     <div>
+      <SearchHero />
       <SuperheroesCard
         name={heroes.name}
         imageUrl={heroes.image?.url}
