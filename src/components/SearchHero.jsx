@@ -41,7 +41,10 @@ export default function SearchHero() {
         </Button>
       </Form>
       <div>
-        {heroes && heroes.map((hero) => <SearchHeroCard name={hero.name} />)}
+        {heroes &&
+          heroes.map((hero) => (
+            <SearchHeroCard name={hero.name} image={hero.image?.url} />
+          ))}
       </div>
     </div>
   );

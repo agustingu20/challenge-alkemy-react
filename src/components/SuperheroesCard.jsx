@@ -36,10 +36,10 @@ export default function SuperheroesCard(props) {
           <ul>
             <li>Peso: {props.hero.appearance?.weight.slice(1)} </li>
             <li>Altura: {props.hero.appearance?.height.slice(1)} </li>
-            <li>Nombre: {}</li>
+            <li>Nombre: {props.hero.biography?.["full-name"]}</li>
             <li>Alias: {props.hero.biography?.aliases.slice(1)}</li>
-            <li>Color de ojos: {}</li>
-            <li>Color de cabello: {}</li>
+            <li>Color de ojos: {props.hero.appearance?.["eye-color"]}</li>
+            <li>Color de cabello: {props.hero.appearance?.["hair-color"]}</li>
             <li>Lugar de trabajo: {props.hero.work?.base}</li>
           </ul>
         </div>
