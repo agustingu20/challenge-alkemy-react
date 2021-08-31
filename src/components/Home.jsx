@@ -1,38 +1,71 @@
 import { useEffect, useState } from "react";
-import SuperheroesCard from "./SuperheroesCard";
+import Team from "./Team";
 import axios from "axios";
-import { Form } from "react-bootstrap";
-import SearchHero from "./SearchHero";
+import { Form, Button } from "react-bootstrap";
+import SearchHeroCard from "./SearchHeroCard";
+import "../assets/search.css";
 
 export default function Home() {
-  const [heroes, setHeroes] = useState({});
-  const [heroName, setHeroName] = useState("70");
+  const [heroId, setHeroId] = useState("");
+  const [heroes, setHeroes] = useState([]);
+  const [team, setTeam] = useState([]);
+  console.log("Home ~ team", team);
 
-  useEffect(() => {
-    getHero();
-  }, []);
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setHeroId(value);
+  };
 
-  const getHero = async () => {
-    const response = await axios.get(
-      `https://superheroapi.com/api/10224034783111933/70`
-    );
-    setHeroes(response.data);
+  const handleSubmit = async (e) => {
+    const form = e.currentTarget;
+    e.preventDefault();
+    try {
+      const idHero = heroId;
+      const response = await axios.get(`/${idHero}`);
+      console.log("handleSubmit ~ response", response);
+      setHeroes(response.data);
+      if (idHero === "") {
+        setHeroes("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const teamSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const idHeroTeam = heroId;
+      const response = await axios.get(`/${idHeroTeam}`);
+      setTeam([...team, response.data]);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div>
-      <SearchHero />
-      <SuperheroesCard
-        name={heroes.name}
-        imageUrl={heroes.image?.url}
-        intelligence={heroes.powerstats?.intelligence}
-        strength={heroes.powerstats?.strength}
-        speed={heroes.powerstats?.speed}
-        durability={heroes.powerstats?.durability}
-        power={heroes.powerstats?.power}
-        combat={heroes.powerstats?.combat}
-        hero={heroes}
-      />
+      <div>
+        <Form onSubmit={handleSubmit} className="search-form">
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Hero Name</Form.Label>
+            <Form.Control
+              onChange={handleChange}
+              type="text"
+              placeholder="Enter hero name"
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        <div>
+          <Form onSubmit={teamSubmit}>
+            {heroId !== "" && <SearchHeroCard heroes={heroes} />}
+          </Form>
+        </div>
+      </div>
+      {team !== "" && <Team team={team} />}
     </div>
   );
 }

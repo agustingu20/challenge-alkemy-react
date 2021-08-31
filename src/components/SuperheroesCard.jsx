@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 
-export default function SuperheroesCard(props) {
+export default function SuperheroesCard({ team }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -10,17 +10,17 @@ export default function SuperheroesCard(props) {
   return (
     <div>
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={props.imageUrl} />
+        <Card.Img variant="top" src={team.image?.url} />
         <Card.Body>
-          <Card.Title>{props.name}</Card.Title>
+          <Card.Title>{team.name}</Card.Title>
           <div>
             <ul>
-              <li>Inteligencia: {props.intelligence}</li>
-              <li>Agilidad: {props.strength}</li>
-              <li>Velocidad: {props.speed}</li>
-              <li>Durabilidad: {props.durability}</li>
-              <li>Poder: {props.power}</li>
-              <li>Combate: {props.combat}</li>
+              <li>Inteligencia: {team.powerstats?.intelligence}</li>
+              <li>Agilidad: {team.powerstats?.strength}</li>
+              <li>Velocidad: {team.powerstats?.speed}</li>
+              <li>Durabilidad: {team.powerstats?.durability}</li>
+              <li>Poder: {team.powerstats?.power}</li>
+              <li>Combate: {team.powerstats?.combat}</li>
             </ul>
           </div>
           <Button variant="primary" onClick={handleShow}>
@@ -34,13 +34,13 @@ export default function SuperheroesCard(props) {
         </Modal.Header>
         <div>
           <ul>
-            <li>Peso: {props.hero.appearance?.weight.slice(1)} </li>
-            <li>Altura: {props.hero.appearance?.height.slice(1)} </li>
-            <li>Nombre: {props.hero.biography?.["full-name"]}</li>
-            <li>Alias: {props.hero.biography?.aliases.slice(1)}</li>
-            <li>Color de ojos: {props.hero.appearance?.["eye-color"]}</li>
-            <li>Color de cabello: {props.hero.appearance?.["hair-color"]}</li>
-            <li>Lugar de trabajo: {props.hero.work?.base}</li>
+            <li>Peso: {team.appearance?.weight.slice(1)} </li>
+            <li>Altura: {team.appearance?.height.slice(1)} </li>
+            <li>Nombre: {team.biography?.["full-name"]}</li>
+            <li>Alias: {team.biography?.aliases.slice(1)}</li>
+            <li>Color de ojos: {team.appearance?.["eye-color"]}</li>
+            <li>Color de cabello: {team.appearance?.["hair-color"]}</li>
+            <li>Lugar de trabajo: {team.work?.base}</li>
           </ul>
         </div>
         <Modal.Footer>
