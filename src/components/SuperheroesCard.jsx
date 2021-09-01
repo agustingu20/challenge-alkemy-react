@@ -26,6 +26,13 @@ export default function SuperheroesCard({ team }) {
           <Button variant="primary" onClick={handleShow}>
             Ver detalles
           </Button>
+          <Button
+            variant="primary"
+            className="btn btn-warning mx-2"
+            type="submit"
+          >
+            Eliminar Heroe
+          </Button>
         </Card.Body>
       </Card>
       <Modal show={show} onHide={handleClose}>

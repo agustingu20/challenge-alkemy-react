@@ -12,8 +12,8 @@ function App() {
       <NavbarR />
       <Switch>
         <Route>
-          <Home />
           <Login />
+          <Home />
         </Route>
       </Switch>
     </Router>
