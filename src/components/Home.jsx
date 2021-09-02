@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Team from "./Team";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
@@ -7,17 +7,37 @@ import "../assets/search.css";
 
 export default function Home() {
   const [heroId, setHeroId] = useState("");
-  const [heroes, setHeroes] = useState([]);
+  const [hero, setHero] = useState(null);
   const [team, setTeam] = useState([]);
   const [powerstats, setPowerstats] = useState([]);
-  console.log("Home ~ powerstats", powerstats);
   const [poweracum, setPoweracum] = useState("");
-  console.log("Home ~ poweracum", poweracum);
+  const [heroesQuota, setHeroesQuota] = useState({
+    goodHeroes: 0,
+    badHeroes: 0,
+  });
 
   const handleChange = (event) => {
     const { value } = event.target;
     setHeroId(value);
   };
+
+  const defineHeroesQuota = (team) => {
+    let goodTeammates = 0;
+    let badTeammates = 0;
+
+    for (const teammate of team) {
+      if (teammate.biography.alignment === "good") {
+        goodTeammates = ++goodTeammates;
+      } else {
+        badTeammates = ++badTeammates;
+      }
+    }
+    setHeroesQuota({ goodHeroes: goodTeammates, badHeroes: badTeammates });
+  };
+
+  useEffect(() => {
+    defineHeroesQuota(team);
+  }, [team]);
 
   const handleSubmit = async (e) => {
     const form = e.currentTarget;
@@ -25,9 +45,9 @@ export default function Home() {
     try {
       const idHero = heroId;
       const response = await axios.get(`/${idHero}`);
-      setHeroes(response.data);
+      setHero(response.data);
       if (idHero === "") {
-        setHeroes("");
+        setHero("");
       }
     } catch (error) {
       console.log(error);
@@ -36,14 +56,26 @@ export default function Home() {
 
   const teamSubmit = async (event) => {
     event.preventDefault();
-    if (team.length < "6") {
-      try {
-        const idHeroTeam = heroId;
-        const response = await axios.get(`/${idHeroTeam}`);
-        setTeam([...team, response.data]);
-        setPowerstats([...powerstats, response.data?.powerstats]);
-      } catch (error) {
-        console.log(error);
+    if (team.length < 6) {
+      if (heroesQuota.goodHeroes < 3) {
+        try {
+          const idHeroTeam = heroId;
+          const response = await axios.get(`/${idHeroTeam}`);
+          setTeam([...team, response.data]);
+          setPowerstats([...powerstats, response.data?.powerstats]);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      if (heroesQuota.badHeroes < 3) {
+        try {
+          const idHeroTeam = heroId;
+          const response = await axios.get(`/${idHeroTeam}`);
+          setTeam([...team, response.data]);
+          setPowerstats([...powerstats, response.data?.powerstats]);
+        } catch (error) {
+          console.log(error);
+        }
       }
     } else {
       console.log("no se pueden añadir más heroes");
@@ -68,7 +100,7 @@ export default function Home() {
         </Form>
         <div>
           <Form onSubmit={teamSubmit}>
-            {heroId !== "" && <SearchHeroCard heroes={heroes} />}
+            {hero && <SearchHeroCard hero={hero} />}
           </Form>
         </div>
       </div>
