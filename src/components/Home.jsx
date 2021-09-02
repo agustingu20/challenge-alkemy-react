@@ -61,29 +61,50 @@ export default function Home() {
         try {
           const idHeroTeam = heroId;
           const response = await axios.get(`/${idHeroTeam}`);
-          setTeam([...team, response.data]);
+          const repeatedHeroes = team.find(
+            (teammate) => teammate.id === idHeroTeam
+          );
+          if (!repeatedHeroes) {
+            setTeam([...team, response.data]);
+          }
           setPowerstats([...powerstats, response.data?.powerstats]);
         } catch (error) {
           console.log(error);
         }
       }
-      if (heroesQuota.badHeroes < 3) {
-        try {
-          const idHeroTeam = heroId;
-          const response = await axios.get(`/${idHeroTeam}`);
-          setTeam([...team, response.data]);
-          setPowerstats([...powerstats, response.data?.powerstats]);
-        } catch (error) {
-          console.log(error);
-        }
-      }
+      // if (heroesQuota.badHeroes < 3) {
+      //   try {
+      //     const idHeroTeam = heroId;
+      //     const response = await axios.get(`/${idHeroTeam}`);
+      //     setTeam([...team, response.data]);
+      //     setPowerstats([...powerstats, response.data?.powerstats]);
+      //   } catch (error) {
+      //     console.log(error);
+      //   }
+      // }
     } else {
       console.log("no se pueden añadir más heroes");
     }
   };
 
+  const deleteTeammate = (event) => {
+    event.preventDefault();
+    const teamFiltered = team.filter(
+      (teammate) => teammate.id !== event.target.value
+    );
+    console.log("deleteTeammate ~ event.target.id", event.target.value);
+    setTeam(teamFiltered);
+  };
+
   return (
     <div>
+      <div>
+        Inteligencia total:
+        {team.length &&
+          team.reduce((a, b) => {
+            return a + parseInt(b.powerstats.intelligence);
+          }, 0)}
+      </div>
       <div className="d-flex flex-wrap justify-content-center mb-5 mt-5">
         <Form onSubmit={handleSubmit} className="search-form mx-4">
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -104,7 +125,7 @@ export default function Home() {
           </Form>
         </div>
       </div>
-      {team !== "" && <Team team={team} />}
+      {team !== "" && <Team team={team} deleteTeammate={deleteTeammate} />}
     </div>
   );
 }
