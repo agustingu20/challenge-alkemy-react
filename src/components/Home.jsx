@@ -3,18 +3,22 @@ import Team from "./Team";
 import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import SearchHeroCard from "./SearchHeroCard";
-import "../assets/search.css";
+import "../assets/home.css";
+import TeamPowerstats from "./TeamPowerstats";
+import { useHistory } from "react-router";
 
-export default function Home() {
+export default function Home({ token }) {
   const [heroId, setHeroId] = useState("");
   const [hero, setHero] = useState(null);
   const [team, setTeam] = useState([]);
+  console.log("Home ~ team", team);
   const [powerstats, setPowerstats] = useState([]);
-  const [poweracum, setPoweracum] = useState("");
   const [heroesQuota, setHeroesQuota] = useState({
     goodHeroes: 0,
     badHeroes: 0,
   });
+
+  const history = useHistory();
 
   const handleChange = (event) => {
     const { value } = event.target;
@@ -57,7 +61,7 @@ export default function Home() {
   const teamSubmit = async (event) => {
     event.preventDefault();
     if (team.length < 6) {
-      if (heroesQuota.goodHeroes < 3) {
+      if (heroesQuota.goodHeroes < 3 || heroesQuota.badHeroes < 3) {
         try {
           const idHeroTeam = heroId;
           const response = await axios.get(`/${idHeroTeam}`);
@@ -72,16 +76,6 @@ export default function Home() {
           console.log(error);
         }
       }
-      // if (heroesQuota.badHeroes < 3) {
-      //   try {
-      //     const idHeroTeam = heroId;
-      //     const response = await axios.get(`/${idHeroTeam}`);
-      //     setTeam([...team, response.data]);
-      //     setPowerstats([...powerstats, response.data?.powerstats]);
-      //   } catch (error) {
-      //     console.log(error);
-      //   }
-      // }
     } else {
       console.log("no se pueden añadir más heroes");
     }
@@ -96,15 +90,12 @@ export default function Home() {
     setTeam(teamFiltered);
   };
 
+  if (!token) {
+    history.push("/login");
+  }
+
   return (
     <div>
-      <div>
-        Inteligencia total:
-        {team.length &&
-          team.reduce((a, b) => {
-            return a + parseInt(b.powerstats.intelligence);
-          }, 0)}
-      </div>
       <div className="d-flex flex-wrap justify-content-center mb-5 mt-5">
         <Form onSubmit={handleSubmit} className="search-form mx-4">
           <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -125,7 +116,10 @@ export default function Home() {
           </Form>
         </div>
       </div>
-      {team !== "" && <Team team={team} deleteTeammate={deleteTeammate} />}
+      {team.length !== 0 && <TeamPowerstats team={team} />}
+      {team.length !== 0 && (
+        <Team team={team} deleteTeammate={deleteTeammate} />
+      )}
     </div>
   );
 }

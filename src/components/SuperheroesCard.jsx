@@ -9,8 +9,12 @@ export default function SuperheroesCard({ teammate, deleteTeammate }) {
 
   return (
     <div>
-      <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src={teammate.image?.url} />
+      <Card className="m-2" style={{ width: "18rem" }}>
+        <Card.Img
+          variant="top"
+          className="card-img-heroes"
+          src={teammate.image?.url}
+        />
         <Card.Body>
           <Card.Title>{teammate.name}</Card.Title>
           <div>
@@ -37,12 +41,12 @@ export default function SuperheroesCard({ teammate, deleteTeammate }) {
         </Card.Body>
       </Card>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Detalles</Modal.Title>
         </Modal.Header>
         <div>
           <ul>
-            <li>Peso: {teammate.appearance?.weight.slice(1)} </li>
+            <li>Peso: {teammate.appearance?.weight.slice(1)}</li>
             <li>Altura: {teammate.appearance?.height.slice(1)} </li>
             <li>Nombre: {teammate.biography?.["full-name"]}</li>
             <li>Alias: {teammate.biography?.aliases.slice(1)}</li>
@@ -54,9 +58,6 @@ export default function SuperheroesCard({ teammate, deleteTeammate }) {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
           </Button>
         </Modal.Footer>
       </Modal>

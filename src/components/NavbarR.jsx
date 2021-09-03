@@ -1,14 +1,26 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-export default function NavbarR() {
+export default function NavbarR({ token, logout }) {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
         <Navbar.Brand href="#home">Navbar</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Nav.Link to="/" exact as={NavLink}>
+            Home
+          </Nav.Link>
+          {!token && (
+            <Nav.Link to="/login" as={NavLink}>
+              Login
+            </Nav.Link>
+          )}
+
+          {token && (
+            <Nav.Link to="/login" onClick={logout} as={NavLink}>
+              Logout
+            </Nav.Link>
+          )}
         </Nav>
       </Container>
     </Navbar>

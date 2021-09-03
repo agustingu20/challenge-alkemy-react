@@ -1,0 +1,102 @@
+.search-form {
+  width: 375px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.search-card {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.powerstat-intelligence {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.powerstat-strength {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.powerstat-speed {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.powerstat-durability {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.powerstat-power {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.powerstat-combat {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.appearance-weight {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: red;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.appearence-height {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+  color: white;
+  background-color: red;
+  text-align: center;
+  border: solid 1px black;
+  border-radius: 10px;
+  width: 160px;
+}
+
+.card-img-heroes {
+  max-height: 350px;
+}
