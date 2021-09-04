@@ -1,3 +1,18 @@
 .form-login {
   width: 600px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.603);
+  border-radius: 30px;
+  padding: 1rem;
+}
+
+.background-image-login {
+  background-image: url(../assets/marvel.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 1300px;
+  max-height: auto;
 }

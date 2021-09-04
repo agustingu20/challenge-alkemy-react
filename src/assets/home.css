@@ -2,6 +2,9 @@
   width: 375px;
   margin-left: 20px;
   margin-bottom: 20px;
+  background-color: rgba(0, 0, 0, 0.603);
+  border-radius: 30px;
+  padding: 1rem;
 }
 
 .search-card {
@@ -17,7 +20,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .powerstat-strength {
@@ -28,7 +31,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .powerstat-speed {
@@ -39,7 +42,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .powerstat-durability {
@@ -50,7 +53,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .powerstat-power {
@@ -61,7 +64,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .powerstat-combat {
@@ -72,7 +75,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .appearance-weight {
@@ -83,7 +86,7 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .appearence-height {
@@ -94,9 +97,22 @@
   text-align: center;
   border: solid 1px black;
   border-radius: 10px;
-  width: 160px;
+  width: 170px;
 }
 
 .card-img-heroes {
   max-height: 350px;
+}
+
+.navbar-img {
+  width: 40px;
+}
+
+.background-image {
+  background-image: url(../assets/marvel.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 1300px;
+  max-height: auto;
 }

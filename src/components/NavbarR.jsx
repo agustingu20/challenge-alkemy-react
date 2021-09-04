@@ -5,7 +5,13 @@ export default function NavbarR({ token, logout }) {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+        <Navbar.Brand to="/" as={NavLink}>
+          <img
+            className="navbar-img"
+            src="https://cdn-icons-png.flaticon.com/512/1352/1352480.png"
+            alt=""
+          />
+        </Navbar.Brand>
         <Nav className="me-auto">
           <Nav.Link to="/" exact as={NavLink}>
             Home

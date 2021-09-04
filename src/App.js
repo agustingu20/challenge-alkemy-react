@@ -24,7 +24,7 @@ function App() {
           <Home token={token} />
         </Route>
         <Route path="/login" exact>
-          <Login setToken={setToken} />
+          <Login token={token} setToken={setToken} />
         </Route>
       </Switch>
     </Router>

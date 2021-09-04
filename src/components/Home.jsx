@@ -11,7 +11,6 @@ export default function Home({ token }) {
   const [heroId, setHeroId] = useState("");
   const [hero, setHero] = useState(null);
   const [team, setTeam] = useState([]);
-  console.log("Home ~ team", team);
   const [powerstats, setPowerstats] = useState([]);
   const [heroesQuota, setHeroesQuota] = useState({
     goodHeroes: 0,
@@ -54,7 +53,7 @@ export default function Home({ token }) {
         setHero("");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
 
@@ -95,11 +94,11 @@ export default function Home({ token }) {
   }
 
   return (
-    <div>
-      <div className="d-flex flex-wrap justify-content-center mb-5 mt-5">
-        <Form onSubmit={handleSubmit} className="search-form mx-4">
+    <div className="background-image">
+      <div className="d-flex flex-wrap justify-content-center mb-5 pt-5">
+        <Form onSubmit={handleSubmit} className="search-form mx-4 h-100">
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Hero Id</Form.Label>
+            <Form.Label className="text-light fw-bold">Hero Id</Form.Label>
             <Form.Control
               onChange={handleChange}
               type="number"
